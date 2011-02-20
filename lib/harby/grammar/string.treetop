@@ -2,7 +2,15 @@ module Harby
 	module Grammar
 		grammar String
 			rule string
-				naked
+				single_quoted / naked
+			end
+			
+			rule single_quoted
+				"'" value:("\\'" / !"'" .)* "'" {
+					def parsed_value
+						value.text_value.gsub("\\'", "'")
+					end
+				}
 			end
 			
 			rule naked
