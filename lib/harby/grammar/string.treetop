@@ -1,0 +1,17 @@
+module Harby
+	module Grammar
+		grammar String
+			rule string
+				naked
+			end
+			
+			rule naked
+				("\\ " / !" " .)+ {
+					def parsed_value
+						text_value.gsub("\\ ", " ")
+					end
+				}
+			end
+		end
+	end
+end
