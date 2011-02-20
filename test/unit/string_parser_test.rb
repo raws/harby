@@ -1,11 +1,7 @@
 require "test_helper"
 
 module Harby
-  class ArgumentsParserTest < TestCase
-    def setup
-      @parser = Grammar::ArgumentsParser.new
-    end
-    
+  class StringParserTest < ParserTestCase
     test "an empty string should not parse" do
       assert_not_parsed ""
       assert_not_parsed " "
@@ -65,16 +61,6 @@ module Harby
       assert_parsed "foo 'bar baz'", ["foo", "bar baz"]
       assert_parsed "foo\\ bar 'baz\\'oo'", ["foo bar", "baz'oo"]
       assert_parsed "foo ' bar ' baz\\ ", ["foo", " bar ", "baz "]
-    end
-    
-    def assert_parsed(input, expected)
-      result = @parser.parse(input)
-      flunk "Failed to parse #{input.inspect}: #{@parser.failure_reason}" unless result
-      assert_equal expected, result.parsed_args
-    end
-    
-    def assert_not_parsed(input)
-      assert_nil @parser.parse(input)
     end
   end
 end
