@@ -8,8 +8,6 @@ module Harby
       assert_parsed "5 '5' 5.0 '5.0'", [5, "5", 5.0, "5.0"]
       assert_parsed '"5" 5 "5.0" 5.0', ["5", 5, "5.0", 5.0]
       assert_parsed "5\\ 0 5 5.0 5\\ .\\ 0", ["5 0", 5, 5.0, "5 . 0"]
-      assert_parsed ":foo ':bar' :baz", [:foo, ":bar", :baz]
-      assert_parsed ':foo ":bar" :baz', [:foo, ":bar", :baz]
     end
   end
 end
