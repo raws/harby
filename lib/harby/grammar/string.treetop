@@ -2,7 +2,15 @@ module Harby
 	module Grammar
 		grammar String
 			rule string
-				single_quoted / naked
+				double_quoted / single_quoted / naked
+			end
+			
+			rule double_quoted
+				'"' value:('\\"' / !'"' .)* '"' {
+					def parsed_value
+						value.text_value.gsub('\\"', '"')
+					end
+				}
 			end
 			
 			rule single_quoted
