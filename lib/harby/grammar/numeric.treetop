@@ -1,0 +1,17 @@
+module Harby
+	module Grammar
+		grammar Numeric
+			rule numeric
+				integer
+			end
+			
+			rule integer
+				[-+]? [0-9]+ {
+					def parsed_value
+						text_value.to_i
+					end
+				}
+			end
+		end
+	end
+end

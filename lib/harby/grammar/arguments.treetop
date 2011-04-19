@@ -1,6 +1,7 @@
 module Harby
 	module Grammar
 		grammar Arguments
+			include Numeric
 			include String
 			
 			rule arguments
@@ -20,7 +21,7 @@ module Harby
 			end
 			
 			rule argument
-				string
+				numeric / string
 			end
 		end
 	end
