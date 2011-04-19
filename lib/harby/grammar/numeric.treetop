@@ -2,7 +2,15 @@ module Harby
 	module Grammar
 		grammar Numeric
 			rule numeric
-				integer
+				float / integer
+			end
+			
+			rule float
+				[-+]? [0-9]+ "." [0-9]+ {
+					def parsed_value
+						text_value.to_f
+					end
+				}
 			end
 			
 			rule integer
