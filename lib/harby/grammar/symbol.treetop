@@ -1,0 +1,13 @@
+module Harby
+	module Grammar
+		grammar Symbol
+			rule symbol
+				":" value:[a-zA-Z_]+ {
+					def parsed_value
+						value.text_value.to_sym
+					end
+				}
+			end
+		end
+	end
+end

@@ -3,6 +3,7 @@ module Harby
 		grammar Arguments
 			include Numeric
 			include String
+			include Symbol
 			
 			rule arguments
 				first_arg:argument rest_args:(" "+ arg:argument)* {
@@ -21,7 +22,7 @@ module Harby
 			end
 			
 			rule argument
-				numeric / string
+				numeric / symbol / string
 			end
 		end
 	end
