@@ -6,7 +6,7 @@ module Harby
 			end
 			
 			rule float
-				[-+]? [0-9]+ "." [0-9]+ {
+				sign? number+ "." number+ {
 					def parsed_value
 						text_value.to_f
 					end
@@ -14,11 +14,19 @@ module Harby
 			end
 			
 			rule integer
-				[-+]? [0-9]+ {
+				sign? number+ {
 					def parsed_value
 						text_value.to_i
 					end
 				}
+			end
+			
+			rule number
+				[0-9]
+			end
+			
+			rule sign
+				[-+]
 			end
 		end
 	end
