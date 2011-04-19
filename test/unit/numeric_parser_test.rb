@@ -12,6 +12,7 @@ module Harby
     test "an invalid float argument" do
       assert_parsed "--12.3", ["--12.3"]
       assert_parsed "++12.3", ["++12.3"]
+      assert_parsed "12.3abc", ["12.3abc"]
     end
     
     test "multiple float arguments" do
@@ -33,6 +34,7 @@ module Harby
     test "an invalid integer argument" do
       assert_parsed "--123", ["--123"]
       assert_parsed "++123", ["++123"]
+      assert_parsed "123abc", ["123abc"]
     end
     
     test "multiple integer arguments" do

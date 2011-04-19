@@ -2,31 +2,27 @@ module Harby
 	module Grammar
 		grammar Numeric
 			rule numeric
-				float / integer
-			end
-			
-			rule float
-				sign? number+ "." number+ {
+				sign? number {
 					def parsed_value
+						text_value =~ /\./ ? float_value : integer_value
+					end
+					
+					def float_value
 						text_value.to_f
 					end
-				}
-			end
-			
-			rule integer
-				sign? number+ {
-					def parsed_value
+					
+					def integer_value
 						text_value.to_i
 					end
 				}
 			end
 			
-			rule number
-				[0-9]
-			end
-			
 			rule sign
 				[-+]
+			end
+			
+			rule number
+				[0-9\.]+ ![^0-9\. ]
 			end
 		end
 	end
