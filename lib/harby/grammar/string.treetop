@@ -22,7 +22,7 @@ module Harby
 			end
 			
 			rule naked
-				!":" ("\\ " / !" " .)+ {
+				("\\ " / !" " !"]" .)+ {
 					def parsed_value
 						text_value.gsub("\\ ", " ")
 					end

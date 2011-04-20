@@ -11,7 +11,7 @@ module Harby
 					end
 					
 					def parsed_args
-						args.map { |arg| arg.parsed_value }
+						@parsed_args ||= args.map { |arg| arg.parsed_value }
 					end
 					
 					def rest_args
@@ -21,7 +21,27 @@ module Harby
 			end
 			
 			rule argument
-				numeric / string
+				command / numeric / string
+			end
+			
+			rule command
+				"[" arguments:arguments "]" {
+					def args
+						arguments.parsed_args
+					end
+					
+					def name
+						args.first
+					end
+					
+					def parsed_args
+						args[1..-1]
+					end
+					
+					def parsed_value
+						delegate.handle(name, parsed_args)
+					end
+				}
 			end
 		end
 	end
