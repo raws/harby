@@ -1,7 +1,7 @@
 module Harby
   class ParserTestCase < TestCase
     def setup
-      @parser = Parser.new(TestDelegate.new)
+      @parser = Parser.new(ReflectDelegate.new)
     end
     
     def assert_parsed(input, expected)

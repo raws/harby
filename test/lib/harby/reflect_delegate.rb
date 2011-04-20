@@ -1,5 +1,5 @@
 module Harby
-  class TestDelegate
+  class ReflectDelegate
     def handle(name, args)
       { :name => name, :args => args }
     end

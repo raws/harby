@@ -6,9 +6,15 @@ module Harby
 			end
 			
 			rule double_quoted
-				'"' value:('\\"' / !'"' .)* '"' {
+				'"' value:('\\"' / command / !'"' .)* '"' {
 					def parsed_value
-						value.text_value.gsub('\\"', '"')
+						value.elements.map do |element|
+							if element.respond_to?(:parsed_value)
+								element.parsed_value
+							else
+								element.text_value.gsub('\\"', '"')
+							end
+						end.join("")
 					end
 				}
 			end
