@@ -1,6 +1,6 @@
 module Harby
   class ReflectDelegate
-    def handle(name, args)
+    def on_command(name, args)
       { :name => name, :args => args }
     end
   end

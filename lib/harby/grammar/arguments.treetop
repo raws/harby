@@ -40,7 +40,7 @@ module Harby
 					end
 					
 					def parsed_value
-						delegate.handle(name, parsed_args)
+						delegate.on_command(name, parsed_args)
 					end
 				}
 			end

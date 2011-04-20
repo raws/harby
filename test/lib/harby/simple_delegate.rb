@@ -1,6 +1,6 @@
 module Harby
   class SimpleDelegate
-    def handle(name, args)
+    def on_command(name, args)
       name.gsub!(/\s/, "_")
       "#{name}(#{args.join(", ")})"
     end
