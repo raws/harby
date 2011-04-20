@@ -1,4 +1,4 @@
-## Harby
+### Harby
 
 Harby is a parser for a simple Tcl-like grammar, ideal for handling arguments to one-line text commands, such as with IRC bots.
 
