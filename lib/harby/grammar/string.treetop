@@ -24,7 +24,7 @@ module Harby
 			rule naked
 				("\\ " / !" " !"]" .)+ {
 					def parsed_value
-						text_value.gsub("\\ ", " ")
+						text_value.gsub("\\ ", " ").gsub("\\/", "/")
 					end
 				}
 			end

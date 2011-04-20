@@ -11,6 +11,10 @@ module Harby
       assert_parsed "foo [bar 5]", ["foo", {:name => "bar", :args => [5]}]
       assert_parsed "foo [bar 5.0]", ["foo", {:name => "bar", :args => [5.0]}]
       assert_parsed "[foo bar 123 'baz oof']", [{:name => "foo", :args => ["bar", 123, "baz oof"]}]
+      assert_parsed "/foo/ bar 123", [/foo/, "bar", 123]
+      assert_parsed "[foo /bar/]", [{:name => "foo", :args => [/bar/]}]
+      assert_parsed "[/foo/ bar]", [{:name => /foo/, :args => ["bar"]}]
+      assert_parsed "[/foo/i bar 12.3]", [{:name => /foo/i, :args => ["bar", 12.3]}]
     end
   end
 end

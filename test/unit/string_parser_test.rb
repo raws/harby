@@ -28,8 +28,7 @@ module Harby
       assert_parsed "foo'bar'", ["foo'bar'"]
       assert_parsed "'foo\"bar", ["'foo\"bar"]
       assert_parsed "foo/bar", ["foo/bar"]
-      assert_parsed "/foo/bar", ["/foo/bar"]
-      assert_parsed "/foo/bar/", ["/foo/bar/"]
+      assert_parsed "\\/foo\\/", ["/foo/"]
     end
     
     test "multiple naked string arguments" do
@@ -46,6 +45,7 @@ module Harby
       assert_parsed "' foo'", [" foo"]
       assert_parsed "'foo bar'", ["foo bar"]
       assert_parsed "'foo\\'bar'", ["foo'bar"]
+      assert_parsed "'/foo/'", ["/foo/"]
     end
     
     test "multiple single-quoted string arguments" do
@@ -60,6 +60,7 @@ module Harby
       assert_parsed '"foo "', ["foo "]
       assert_parsed '"foo \"bar\""', ['foo "bar"']
       assert_parsed '"foo \'bar\'"', ["foo 'bar'"]
+      assert_parsed '"/foo/"', ["/foo/"]
     end
     
     test "mixed string arguments" do

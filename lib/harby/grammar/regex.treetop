@@ -1,0 +1,25 @@
+module Harby
+	module Grammar
+		grammar Regex
+			rule regex
+				"/" pattern:("\\/" / !"/" .)+ "/" modifiers:[iIxXmM]* {
+					def parsed_value
+						Regexp.new(pattern.text_value, modifiers)
+					end
+					
+					def modifiers
+						@modifiers ||= super.text_value.downcase.split("").map do |letter|
+							case letter
+							when "i" then Regexp::IGNORECASE
+							when "x" then Regexp::EXTENDED
+							when "m" then Regexp::MULTILINE
+							else nil; end
+						end.compact.uniq.inject(0) do |flags, modifier|
+							flags |= modifier
+						end
+					end
+				}
+			end
+		end
+	end
+end

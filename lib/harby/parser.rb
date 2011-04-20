@@ -18,6 +18,10 @@ module Harby
       @parser.delegate
     end
     
+    def failure_reason
+      @parser.failure_reason
+    end
+    
     def self.parse(input)
       new.parse(input)
     end
