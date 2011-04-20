@@ -27,6 +27,9 @@ module Harby
       assert_parsed 'foo"bar"', ['foo"bar"']
       assert_parsed "foo'bar'", ["foo'bar'"]
       assert_parsed "'foo\"bar", ["'foo\"bar"]
+      assert_parsed "foo/bar", ["foo/bar"]
+      assert_parsed "/foo/bar", ["/foo/bar"]
+      assert_parsed "/foo/bar/", ["/foo/bar/"]
     end
     
     test "multiple naked string arguments" do
