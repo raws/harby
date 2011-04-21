@@ -26,7 +26,7 @@ module Harby
 			end
 			
 			rule command
-				"[" arguments:arguments "]" {
+				"[" arguments "]" {
 					def args
 						arguments.parsed_args
 					end
