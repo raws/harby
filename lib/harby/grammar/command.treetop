@@ -1,0 +1,29 @@
+module Harby
+	module Grammar
+		grammar Command
+			rule command
+				"[" arguments "]" {
+					def args
+						arguments.parsed_args
+					end
+					
+					def name
+						args.first
+					end
+					
+					def parsed_args
+						args[1..-1]
+					end
+					
+					def parsed_value
+						if delegate.respond_to?(:on_command)
+							delegate.on_command(name, parsed_args)
+						else
+							""
+						end
+					end
+				}
+			end
+		end
+	end
+end
