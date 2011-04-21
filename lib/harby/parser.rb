@@ -24,12 +24,12 @@ module Harby
       @parser.failure_reason
     end
     
-    def self.parse(input)
-      new.parse(input)
+    def self.parse(input, delegate = nil)
+      new(delegate).parse(input)
     end
   end
   
-  def self.parse(input)
-    Parser.parse(input)
+  def self.parse(input, delegate = nil)
+    Parser.parse(input, delegate)
   end
 end

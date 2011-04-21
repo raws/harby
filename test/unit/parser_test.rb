@@ -19,5 +19,15 @@ module Harby
     test "parsing arguments using Harby.parse" do
       assert_equal ["foo", 123, "bar"], Harby.parse("foo 123 bar")
     end
+    
+    test "passing a delegate to Parser.parse" do
+      refute_equal Parser.parse("[foo bar]"), Parser.parse("[foo bar]", SimpleDelegate.new)
+      assert_equal ["foo(bar)"], Parser.parse("[foo bar]", SimpleDelegate.new)
+    end
+    
+    test "passing a delegate to Harby.parse" do
+      refute_equal Harby.parse("[foo bar]"), Harby.parse("[foo bar]", SimpleDelegate.new)
+      assert_equal ["foo(bar)"], Harby.parse("[foo bar]", SimpleDelegate.new)
+    end
   end
 end
