@@ -1,5 +1,7 @@
 module Harby
   class Parser
+    attr_reader :parser
+    
     def initialize(delegate = nil)
       @parser = Grammar::ArgumentsParser.new
       @parser.delegate = delegate || NullDelegate.new
