@@ -7,6 +7,7 @@ require "harby/concerns/delegation"
 require "harby/ext/compiled_parser"
 require "harby/ext/syntax_node"
 
+require "harby/grammar/array"
 require "harby/grammar/command"
 require "harby/grammar/numeric"
 require "harby/grammar/regex"

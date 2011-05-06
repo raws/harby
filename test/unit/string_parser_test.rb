@@ -85,6 +85,30 @@ module Harby
       assert_not_parsed "foo\\ [bar]"
     end
     
+    test "double-quoted strings don't interpolate arrays" do
+      assert_parsed '"(foo)"', ["(foo)"]
+      assert_parsed '"(foo bar baz)"', ["(foo bar baz)"]
+      assert_parsed '":)"', [":)"]
+      assert_parsed '":("', [":("]
+    end
+    
+    test "single-quoted strings don't interpolate arrays" do
+      assert_parsed "'(foo)'", ["(foo)"]
+      assert_parsed "'(foo bar baz)'", ["(foo bar baz)"]
+      assert_parsed "':)'", [":)"]
+      assert_parsed "':('", [":("]
+    end
+    
+    test "naked strings don't interpolate arrays" do
+      assert_parsed "fo(o)", ["fo(o)"]
+      assert_parsed ":)", [":)"]
+      assert_parsed ":(", [":("]
+    end
+    
+    test "naked strings can escape arrays" do
+      assert_parsed "\\(foo)", ["(foo)"]
+    end
+    
     test "mixed string arguments" do
       assert_parsed "foo 'bar baz'", ["foo", "bar baz"]
       assert_parsed "foo\\ bar 'baz\\'oo'", ["foo bar", "baz'oo"]

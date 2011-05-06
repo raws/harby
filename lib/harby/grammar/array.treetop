@@ -1,0 +1,13 @@
+module Harby
+	module Grammar
+		grammar Array
+			rule array
+				"(" arguments ")" {
+					def parsed_value
+						arguments.parsed_args
+					end
+				}
+			end
+		end
+	end
+end
