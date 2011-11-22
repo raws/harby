@@ -1,5 +1,5 @@
 module Harby
   class NullDelegate
-    def handle(*args); end
+    def on_command(*args); end
   end
 end
