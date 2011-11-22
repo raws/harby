@@ -10,5 +10,5 @@ spec = Gem::Specification.new do |s|
   s.require_path = "lib"
   
   s.required_ruby_version = ">= 1.9.2"
-  s.add_dependency "treetop", ">= 1.4.9"
+  s.add_dependency "treetop", ">= 1.4.10"
 end
