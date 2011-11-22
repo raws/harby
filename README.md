@@ -13,7 +13,7 @@ Harby's syntax is simple—elements separated by whitespace. Here's an overview 
 Strings come in three flavors: "naked," single-quoted, and double-quoted. Use "naked" strings for single words or short phrases (escape spaces with `\`). Use single quotes for strings with lots of whitespace or brackets that you don't want to turn into commands. Use double quotes for strings with commands inside of them.
 
     foo bar\ baz      #=> ["foo", "bar baz"]
-    foo 'bar baz'     #=> ["foo", "bar 'baz"]
+    foo 'bar baz'     #=> ["foo", "bar baz"]
     foo "bar [smile]" #=> ["foo", "bar :)"]
 
 Single and double quotes can be escaped with `\'` and `\"`, respectively.
