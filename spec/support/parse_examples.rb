@@ -81,14 +81,29 @@ shared_examples '#parse' do
     it { is_expected.to eq([12.3, 'foo bar', 'baz']) }
   end
 
+  context 'with a curly single-quoted string' do
+    let(:input) { '12.3 ‘foo bar’ baz' }
+    it { is_expected.to eq([12.3, 'foo bar', 'baz']) }
+  end
+
+  context 'with a mismatched curly single-quoted string' do
+    let(:input) { '12.3 ‘foo bar\' baz' }
+    it { is_expected.to eq([12.3, 'foo bar', 'baz']) }
+  end
+
   context 'with a single-quoted string containing forward slashes' do
     let(:input) { 'foo \'/bar/\' baz' }
     it { is_expected.to eq(['foo', '/bar/', 'baz']) }
   end
 
-  context 'with a single-quoted string containing an escaped single quote' do
-    let(:input) { "'foo\\'bar' baz" }
-    it { is_expected.to eq(["foo'bar", 'baz']) }
+  context 'with a single-quoted string containing escaped single quotes' do
+    let(:input) { "'foo\\'bar\\'' baz" }
+    it { is_expected.to eq(["foo'bar'", 'baz']) }
+  end
+
+  context 'with a single-quoted string containing escaped curly single quotes' do
+    let(:input) { "'foo \\‘bar\\’ baz'" }
+    it { is_expected.to eq(['foo ‘bar’ baz']) }
   end
 
   context 'with a single-quoted string containing a command' do
@@ -101,9 +116,29 @@ shared_examples '#parse' do
     it { is_expected.to be_nil }
   end
 
+  context 'with a curly double-quoted string' do
+    let(:input) { 'foo “bar” baz' }
+    it { is_expected.to eq(['foo', 'bar', 'baz']) }
+  end
+
+  context 'with a mismatched curly double-quoted string' do
+    let(:input) { 'foo “bar" baz' }
+    it { is_expected.to eq(['foo', 'bar', 'baz']) }
+  end
+
   context 'with a double-quoted string containing forward slashes' do
     let(:input) { '"/foo/"' }
     it { is_expected.to eq(['/foo/']) }
+  end
+
+  context 'with a double-quoted string containing escaped double quotes' do
+    let(:input) { '"foo \\"bar\\" baz"' }
+    it { is_expected.to eq(['foo "bar" baz']) }
+  end
+
+  context 'with a double-quoted string containing escaped curly double quotes' do
+    let(:input) { '"foo \\“bar\\” baz"' }
+    it { is_expected.to eq(['foo “bar” baz']) }
   end
 
   context 'with a double-quoted string containing a command' do

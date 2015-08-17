@@ -10,23 +10,31 @@ Harby's syntax is simple—elements separated by whitespace. Here's an overview 
 
 #### Strings
 
-Strings come in three flavors: "naked," single-quoted, and double-quoted. Use "naked" strings for single words or short phrases (escape spaces with `\`). Use single quotes for strings with lots of whitespace or brackets that you don't want to turn into commands. Use double quotes for strings with commands inside of them.
+Strings come in three flavors: "naked," single-quoted, and double-quoted. Use "naked" strings for single words or short phrases (escape spaces with `\`). Use single quotes for strings with lots of whitespace or brackets that you don't want to turn into commands. Use double quotes for strings with commands inside of them. Curly quotes are supported, too.
 
 ```
-foo bar\ baz      #=> ['foo', 'bar baz']
-foo 'bar baz'     #=> ['foo', 'bar baz']
-foo "bar [smile]" #=> ['foo', 'bar :)']
+foo bar\ baz #=> ["foo", "bar baz"]
+foo 'bar baz' #=> ["foo", "bar baz"]
+foo ‘bar baz’ #=> ["foo", "bar baz"]
+foo "bar [smile]" #=> ["foo", "bar :)"]
+foo “bar [smile]” #=> ["foo", "bar :)"]
 ```
 
-Single and double quotes can be escaped with `\'` and `\"`, respectively.
+Single and double quotes can be escaped with a backslash.
+
+```
+foo 'bar \'baz\' qux' #=> ["foo", "bar 'baz' qux"]
+foo "bar \"baz\" qux" #=> ["foo", "bar \"baz\" qux"]
+foo “bar \“baz\” qux” #=> ["foo", "bar “baz” qux"]
+```
 
 #### Numbers
 
 Integers and floats are turned into their Ruby counterparts.
 
 ```
-foo 123  #=> ['foo', 123]
-foo 12.3 #=> ['foo', 12.3]
+foo 123 #=> ["foo", 123]
+foo 12.3 #=> ["foo", 12.3]
 ```
 
 #### Regular expressions
@@ -34,8 +42,8 @@ foo 12.3 #=> ['foo', 12.3]
 Regular expressions are arguments contained within `/.../` with optional modifiers, and may contain whitespace.
 
 ```
-foo /bar baz/     #=> ['foo', /bar baz/]
-foo /b[aeu]r/ix   #=> ['foo', /b[aeu]r/ix]
+foo /bar baz/ #=> ["foo", /bar baz/]
+foo /b[aeu]r/ix #=> ["foo", /b[aeu]r/ix]
 ```
 
 #### Commands
@@ -43,9 +51,10 @@ foo /b[aeu]r/ix   #=> ['foo', /b[aeu]r/ix]
 Commands are wrapped in brackets (`[]`) and are constructed of a name and any number of optional arguments of any type. The command name or any of its arguments may even be other commands!
 
 ```
-[smile]            #=> [':)']
-[repeat 3 [smile]] #=> [':):):)']
-[delete /aeiou\s/i 'I am a giant bucket'] #=> ['mgntbckt']
+[smile] #=> [":)"]
+[repeat 3 [smile]] #=> [":):):)"]
+[delete /aeiou\s/i 'I am a giant bucket'] #=> ["mgntbckt"]
+[[random smile frown] 3] #=> [":)))"] or [":((("]
 ```
 
 ### Usage
@@ -55,7 +64,7 @@ Instantiate `Harby::Parser` and pass string input to its `#parse` method.
 ```ruby
 require 'harby'
 parser = Harby::Parser.new
-parser.parse 'foo bar' #=> ['foo', 'bar']
+parser.parse 'foo bar' #=> ["foo", "bar"]
 ```
 
 To handle commands, you may pass a delegate object or block to `Harby::Parser.new` or assign it after instantiation. A delegate object is any object which responds to `#call(name, args)`.
@@ -72,7 +81,7 @@ parser = Harby::Parser.new(->(name, args) { "#{name}(#{args.join(', ')})" })
 # Or assign a delegate to an instance
 parser.delegate = ->(name, args) { "#{name}(#{args.join(', ')})" }
 
-parser.parse '[foo bar baz]' #=> ['foo(bar, baz)']
+parser.parse '[foo bar baz]' #=> ["foo(bar, baz)"]
 ```
 
 ### Contributing
