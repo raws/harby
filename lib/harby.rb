@@ -13,5 +13,4 @@ require "harby/grammar/regex"
 require "harby/grammar/string"
 require "harby/grammar/arguments"
 
-require "harby/null_delegate"
 require "harby/parser"

@@ -5,23 +5,23 @@ module Harby
 			include Numeric
 			include Regex
 			include String
-			
+
 			rule arguments
-				first_arg:argument rest_args:(" "+ arg:argument)* {
+				' '* first_arg:argument rest_args:(' '+ arg:argument)* ' '* {
 					def args
 						[first_arg] + rest_args
 					end
-					
+
 					def parsed_args
 						@parsed_args ||= args.map { |arg| arg.parsed_value }
 					end
-					
+
 					def rest_args
 						super.elements.map { |space_and_arg| space_and_arg.arg }
 					end
 				}
 			end
-			
+
 			rule argument
 				command / numeric / regex / string
 			end

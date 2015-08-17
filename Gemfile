@@ -1,3 +1,2 @@
-source :rubygems
-
-gem "treetop", "~> 1.4.10"
+source 'https://rubygems.org'
+gemspec
