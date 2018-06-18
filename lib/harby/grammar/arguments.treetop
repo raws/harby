@@ -2,6 +2,7 @@ module Harby
 	module Grammar
 		grammar Arguments
 			include Command
+			include List
 			include Numeric
 			include Regex
 			include String
@@ -23,7 +24,7 @@ module Harby
 			end
 
 			rule argument
-				command / numeric / regex / string
+				command / list / numeric / regex / string
 			end
 		end
 	end

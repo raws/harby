@@ -263,4 +263,14 @@ shared_examples '#parse' do
     let(:input) { '[/foo/i bar 12.3]' }
     it { is_expected.to eq([{ name: /foo/i, args: ['bar', 12.3] }]) }
   end
+
+  context 'with a simple list' do
+    let(:input) { '(foo bar baz)' }
+    it { is_expected.to eq([['foo', 'bar', 'baz']]) }
+  end
+
+  context 'with lists of varied objects' do
+    let(:input) { 'foo (bar [baz (qux)])' }
+    it { is_expected.to eq(['foo', ['bar', { name: 'baz', args: [['qux']] }]]) }
+  end
 end

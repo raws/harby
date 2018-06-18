@@ -57,6 +57,15 @@ Commands are wrapped in brackets (`[]`) and are constructed of a name and any nu
 [[random smile frown] 3] #=> [":)))"] or [":((("]
 ```
 
+#### Lists
+
+Create lists of other objects using parentheses (`()`).
+
+```
+(foo 'bar baz') #=> ["foo", "bar baz"]
+(foo (bar [smile])) #=> ["foo", ["bar", ":)"]]
+```
+
 ### Usage
 
 Instantiate `Harby::Parser` and pass string input to its `#parse` method.
