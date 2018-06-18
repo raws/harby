@@ -1,6 +1,6 @@
 spec = Gem::Specification.new do |s|
   s.name = 'harby'
-  s.version = '1.1.0'
+  s.version = '1.2.0'
   s.authors  = ['Ross Paffett']
   s.email  = ['ross@rosspaffett.com']
   s.homepage = 'https://github.com/raws/harby'
