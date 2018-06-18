@@ -273,4 +273,14 @@ shared_examples '#parse' do
     let(:input) { 'foo (bar [baz (qux)])' }
     it { is_expected.to eq(['foo', ['bar', { name: 'baz', args: [['qux']] }]]) }
   end
+
+  context 'with a single-quoted string containing parentheses' do
+    let(:input) { "'foo (bar baz)'" }
+    it { is_expected.to eq(['foo (bar baz)']) }
+  end
+
+  context 'with a double-quoted string containing parentheses' do
+    let(:input) { '"foo (bar baz)"' }
+    it { is_expected.to eq(['foo (bar baz)']) }
+  end
 end
