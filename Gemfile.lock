@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    harby (1.1.0)
+    harby (1.2.0)
       treetop (~> 1.6, >= 1.6.3)
 
 GEM
